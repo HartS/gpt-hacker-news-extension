@@ -61,3 +61,18 @@ if (currentURL.indexOf("item?id=") !== -1) {
     // Loop through all the comments on the page
     var comments = document.querySelect
 
+6. To test your extension, open Chrome and go to the Extensions page (chrome://extensions/).
+
+7. Enable the "Developer mode" option at the top of the page.
+
+8. Click on the "Load unpacked" button and select the folder that contains your extension files. This will install your extension in Chrome.
+
+9. Open Hacker News and navigate to a comment thread. You should see your extension's icon in the Chrome toolbar.
+
+10. Click on the extension's icon to open the popup window and verify that the content is displayed correctly.
+
+11. To test the highlighting of new comments, refresh the comment thread page and verify that any comments that were not visible the last time you visited the thread are now highlighted.
+
+12. If you encounter any issues or want to make further changes to your extension, you can edit the extension files and reload the extension by clicking on the "Reload" button next to your extension on the Extensions page.
+
+I hope this helps! Let me know if you have any other questions.
