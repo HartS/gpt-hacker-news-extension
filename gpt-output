@@ -249,3 +249,41 @@ console.log("Current URL: ", window.location.href);
 
 7. To see the logs, go to the "Console" tab in the DevTools and you should see the log message that was printed by the console.log() statement. You can click on the log message to see more details, such as the values of
 
+Here are some suggestions for where you can add console.log() statements in the script, and what you can log to help determine why nothing in the DOM is getting updated:
+
+1. Add a console.log() statement at the beginning of the script to log the current URL of the page. This will help you verify that the content script is being injected into the correct page. For example:
+
+console.log("Current URL: ", window.location.href);
+
+2. Add a console.log() statement after the if statement that checks if the current URL is a comment thread on Hacker News. This will help you verify that the script is entering the correct branch of the if statement. For example:
+
+if (currentURL.indexOf("item?id=") !== -1) {
+  console.log("URL is a comment thread on Hacker News");
+  ...
+
+3. Add a console.log() statement after the if statement that checks if the user has visited the comment thread before. This will help you verify that the script is entering the correct branch of the if statement, and that the local storage item for the thread is being set and retrieved correctly. For example:
+
+if (localStorage.getItem(threadID) === null) {
+  console.log("User has not visited the thread before");
+  ...
+else {
+  console.log("User has visited the thread before. Last visit: ", localStorage.getItem(threadID));
+  ...
+
+4. Add a console.log() statement inside the for loop that loops through the comments on the page. This will help you see how many comments are on the page, and what the timestamp of each comment is. For example:
+
+for (var i = 0; i < comments.length; i++) {
+  console.log("Comment #" + (i + 1) + ": ", comments[i].querySelector(".age a").getAttribute("title"));
+  ...
+
+5. Add a console.log() statement inside the if statement that checks if a comment was posted after the user's last visit to the thread. This will help you see which comments are being highlighted, and why. For example:
+
+if (commentTime > lastVisit) {
+  console.log("Comment was posted after the user's last visit. Highlighting comment.");
+  comments[i].style.backgroundColor = "yellow";
+}
+
+By adding these console.log() statements and inspecting the logs in the DevTools console, you should be able to get a better understanding of what's happening in the script and why nothing in the DOM is getting updated.
+
+I hope this helps! Let me know if you have any other questions.
+
