@@ -562,3 +562,47 @@ With this change, the content script should be able to parse the correct timesta
 
 I hope this helps! Let me know if you have any other questions.
 
+The content script is highlighting all of the comments because the lastVisit variable is always initialized to the same value, which is the timestamp of the user's last visit to the thread. This means that, even when the user revisits a thread, the lastVisit variable always has the same value, so the if statement in the loop always evaluates to true, and all of the comments are highlighted.
+
+To fix this issue, you can update the code to store the last timestamp of the comments that were visible on the page the last time the user visited the thread, rather than the timestamp of the user's last visit. Then, when the user revisits the thread, the content script can compare the timestamps of the comments on the page with the timestamp of the last comment that was visible on the page the last time the user visited the thread, and highlight only the comments that were posted after the last timestamp.
+
+Here is what the updated content-script.js file would look like, with the changes to store and compare the timestamps of the comments on the page:
+
+console.log("Current URL: ", window.location.href);
+
+var currentURL = window.location.href;
+
+if (currentURL.indexOf("item?id=") !== -1) {
+  console.log("URL is a comment thread on Hacker News");
+
+  var threadID = currentURL.split("=")[1];
+
+  if (localStorage.getItem(threadID) === null) {
+    console.log("User has not visited the thread before");
+
+    localStorage.setItem(threadID, Date.now());
+  } else {
+    console.log("User has visited the thread before. Last visit: ", localStorage.getItem(threadID));
+
+    var lastVisit = localStorage.getItem(threadID);
+  }
+
+  var comments = document.querySelectorAll(".comment-tree .comtr");
+
+  console.log("Number of comments on page: ", comments.length);
+
+  var lastCommentTime = 0;
+
+  for (var i = 0; i < comments.length; i++) {
+    var commentTime = new Date(comments[i].querySelector(".age").getAttribute("title")).getTime();
+
+    console.log("Comment #" + (i + 1) + " timestamp: ", commentTime);
+
+    if (commentTime > lastCommentTime) {
+      lastCommentTime = commentTime;
+    }
+  }
+
+  for (var i
+
+
