@@ -19,11 +19,15 @@ if (currentURL.indexOf("item?id=") !== -1) {
 
   var comments = document.querySelectorAll(".comment-tree .comtr");
 
+  console.log("Number of comments on page: ", comments.length);
+
   for (var i = 0; i < comments.length; i++) {
     var commentTime = new Date(comments[i].querySelector(".age a").getAttribute("title")).getTime();
 
+    console.log("Comment #" + (i + 1) + " timestamp: ", commentTime);
+
     if (commentTime > lastVisit) {
-      console.log("Comment was posted after the user's last visit. Highlighting comment.");
+      console.log("Comment #" + (i + 1) + " was posted after the user's last visit. Highlighting comment.");
 
       comments[i].style.backgroundColor = "yellow";
     }
