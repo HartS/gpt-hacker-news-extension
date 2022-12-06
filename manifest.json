@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "Hacker News Extension",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://news.ycombinator.com/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  }
+}

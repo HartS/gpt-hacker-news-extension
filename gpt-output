@@ -1,0 +1,63 @@
+To write a browser extension for Chrome, you'll need to have some experience with web development and be familiar with technologies like HTML, CSS, and JavaScript. Here's a general outline of the steps you'll need to take to create the extension you've described:
+
+1. Create a new folder on your computer and give it a name that reflects the purpose of your extension. For example, "hacker-news-extension" would be a good name.
+
+2. Inside this folder, create a file called "manifest.json" and add the following code to it:
+
+{
+  "manifest_version": 2,
+  "name": "Hacker News Extension",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://news.ycombinator.com/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  }
+}
+
+This code defines the basic properties of your extension, such as its name and version number, as well as which scripts will be injected into pages that match the specified URL pattern (in this case, any page on Hacker News). It also specifies that your extension will have access to the browser's storage API, which you'll use to keep track of which comments you've already seen.
+
+3. Create an icon for your extension and save it as "icon.png" in the same folder. This icon will be displayed in the Chrome toolbar when your extension is installed.
+
+4. Create a file called "popup.html" in the same folder, and add the following code to it:
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hacker News Extension</title>
+  </head>
+  <body>
+    <h1>Hacker News Extension</h1>
+    <p>This extension highlights new comments on Hacker News.</p>
+  </body>
+</html>
+
+This file defines the HTML content that will be displayed when the user clicks on the extension's icon in the Chrome toolbar. You can customize this content to include any information or instructions you want to provide to the user.
+
+5. Create a file called "content-script.js" in the same folder, and add the following code to it:
+
+// Get the current URL of the page
+var currentURL = window.location.href;
+
+// Check if the current URL is a comment thread on Hacker News
+if (currentURL.indexOf("item?id=") !== -1) {
+  // Get the ID of the comment thread from the URL
+  var threadID = currentURL.split("=")[1];
+
+  // Check if the user has already visited this thread
+  if (localStorage.getItem(threadID) === null) {
+    // If not, set the local storage item for this thread to the current date
+    localStorage.setItem(threadID, Date.now());
+  } else {
+    // If the user has visited the thread before, get the timestamp of the last visit
+    var lastVisit = localStorage.getItem(threadID);
+
+    // Loop through all the comments on the page
+    var comments = document.querySelect
+
