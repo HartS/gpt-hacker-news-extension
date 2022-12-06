@@ -174,3 +174,26 @@ To fix the error, you can either switch to using manifest version 2 by changing 
 
 I hope this helps! Let me know if you have any other questions.
 
+Here is an example of what the manifest file would look like in manifest version 2, with the "browser_action" key instead of the "browser_action" property:
+
+{
+  "manifest_version": 2,
+  "name": "Hacker News Extension",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://news.ycombinator.com/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  }
+}
+
+To use this manifest file, you will need to change the "manifest_version" value from 3 to 2, and update the "browser_action" key and its values according to the example above. This will allow you to use the "browser_action" key in the manifest file, and the extension should load without any errors.
+
+I hope this helps! Let me know if you have any other questions.
+
