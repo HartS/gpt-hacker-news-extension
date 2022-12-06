@@ -474,3 +474,50 @@ With these additional console.log() statements, you should be able to see the nu
 
 I hope this helps! Let me know if you have any other questions.
 
+The content script is not highlighting the new comments because the commentTime variable for each comment is always 0. This is because the .age a element in each comment does not have a title attribute, so the getAttribute() method returns null, which is then passed to the Date constructor as a string, resulting in a date with a timestamp of 0.
+
+To fix this issue, you can change the code to use the datetime attribute instead of the title attribute to get the timestamp of the comment. The datetime attribute is the correct attribute to use when parsing timestamps with the Date constructor.
+
+Here is what the updated content-script.js file would look like, with the changes to use the datetime attribute instead of the title attribute:
+
+console.log("Current URL: ", window.location.href);
+
+var currentURL = window.location.href;
+
+if (currentURL.indexOf("item?id=") !== -1) {
+  console.log("URL is a comment thread on Hacker News");
+
+  var threadID = currentURL.split("=")[1];
+
+  if (localStorage.getItem(threadID) === null) {
+    console.log("User has not visited the thread before");
+
+    localStorage.setItem(threadID, Date.now());
+  } else {
+    console.log("User has visited the thread before. Last visit: ", localStorage.getItem(threadID));
+
+    var lastVisit = localStorage.getItem(threadID);
+  }
+
+  var comments = document.querySelectorAll(".comment-tree .comtr");
+
+  console.log("Number of comments on page: ", comments.length);
+
+  for (var i = 0; i < comments.length; i++) {
+    var commentTime = new Date(comments[i].querySelector(".age a").getAttribute("datetime")).getTime();
+
+    console.log("Comment #" + (i + 1) + " timestamp: ", commentTime);
+
+    if (commentTime > lastVisit) {
+      console.log("Comment #" + (i + 1) + " was posted after the user's last visit. Highlighting comment.");
+
+      comments[i].style.backgroundColor = "yellow";
+    }
+  }
+}
+
+With this change, the content script should be able to parse the correct timestamps for each comment, and it should highlight the new comments when you revisit the comment thread.
+
+I hope this helps! Let me know if you have any other questions.
+
+
