@@ -76,3 +76,41 @@ if (currentURL.indexOf("item?id=") !== -1) {
 12. If you encounter any issues or want to make further changes to your extension, you can edit the extension files and reload the extension by clicking on the "Reload" button next to your extension on the Extensions page.
 
 I hope this helps! Let me know if you have any other questions.
+
+
+Sure, here is the complete code for the content-script.js file:
+
+// Get the current URL of the page
+var currentURL = window.location.href;
+
+// Check if the current URL is a comment thread on Hacker News
+if (currentURL.indexOf("item?id=") !== -1) {
+  // Get the ID of the comment thread from the URL
+  var threadID = currentURL.split("=")[1];
+
+  // Check if the user has already visited this thread
+  if (localStorage.getItem(threadID) === null) {
+    // If not, set the local storage item for this thread to the current date
+    localStorage.setItem(threadID, Date.now());
+  } else {
+    // If the user has visited the thread before, get the timestamp of the last visit
+    var lastVisit = localStorage.getItem(threadID);
+
+    // Loop through all the comments on the page
+    var comments = document.querySelectorAll(".comment-tree .comtr");
+    for (var i = 0; i < comments.length; i++) {
+      // Get the timestamp of the comment
+      var commentTime = comments[i].querySelector(".age a").getAttribute("title");
+      commentTime = new Date(commentTime).getTime();
+
+      // If the comment was posted after the user's last visit, highlight it
+      if (commentTime > lastVisit) {
+        comments[i].style.backgroundColor = "yellow";
+      }
+    }
+  }
+}
+
+This code checks if the current page is a comment thread on Hacker News, and if so, it checks the local storage to see if the user has visited this thread before. If the user hasn't visited the thread before, it sets the local storage item for this thread to the current date. If the user has visited the thread before, it loops through all the comments on the page and checks the timestamp of each comment. If a comment was posted after the user's last visit to the thread, it highlights the comment by setting its background color to yellow.
+
+

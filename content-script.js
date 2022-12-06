@@ -15,4 +15,17 @@ if (currentURL.indexOf("item?id=") !== -1) {
     var lastVisit = localStorage.getItem(threadID);
 
     // Loop through all the comments on the page
-    var comments = document.querySelect
+    var comments = document.querySelectorAll(".comment-tree .comtr");
+    for (var i = 0; i < comments.length; i++) {
+      // Get the timestamp of the comment
+      var commentTime = comments[i].querySelector(".age a").getAttribute("title");
+      commentTime = new Date(commentTime).getTime();
+
+      // If the comment was posted after the user's last visit, highlight it
+      if (commentTime > lastVisit) {
+        comments[i].style.backgroundColor = "yellow";
+      }
+    }
+  }
+}
+
