@@ -230,3 +230,22 @@ To debug the content script, you can use the Chrome DevTools to inspect the page
 8. You can also use the "Sources" tab to see the values of variables and expressions in the script, and you can use the "Watch" pane to watch specific variables and expressions as the script runs.
 
 I hope this helps! Let me know if you have any other questions.
+
+Yes, you can use console.log() statements in the content script to log messages to the DevTools console, and then inspect the logs to see what's happening in the script. Here's how you can do this:
+
+1. Open the comment thread page on Hacker News where you want to test the content script.
+
+2. Open the Chrome DevTools by right-clicking on the page and selecting "Inspect" from the context menu, or by using the keyboard shortcut Ctrl+Shift+I (Windows) or Cmd+Opt+I (macOS).
+
+3. In the DevTools window, go to the "Sources" tab and expand the "Content scripts" section on the left.
+
+4. You should see the "content-script.js" file listed here. Click on it to open the script in the editor pane.
+
+5. Add console.log() statements to the script wherever you want to log messages. For example, you can add a console.log() statement at the beginning of the script to log the current URL of the page, like this:
+
+console.log("Current URL: ", window.location.href);
+
+6. Save the script and refresh the comment thread page. The script should be injected into the page, and the console.log() statement should print a message to the DevTools console.
+
+7. To see the logs, go to the "Console" tab in the DevTools and you should see the log message that was printed by the console.log() statement. You can click on the log message to see more details, such as the values of
+
