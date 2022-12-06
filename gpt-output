@@ -113,4 +113,25 @@ if (currentURL.indexOf("item?id=") !== -1) {
 
 This code checks if the current page is a comment thread on Hacker News, and if so, it checks the local storage to see if the user has visited this thread before. If the user hasn't visited the thread before, it sets the local storage item for this thread to the current date. If the user has visited the thread before, it loops through all the comments on the page and checks the timestamp of each comment. If a comment was posted after the user's last visit to the thread, it highlights the comment by setting its background color to yellow.
 
+The code that I provided should work with manifest version 3, but there may be some slight differences in how the manifest file is structured. In manifest version 3, the "content_scripts" section is replaced by the "content_scripts" key, and the "matches" and "js" keys are moved inside the "content_scripts" array. Here is an example of how the manifest file would look in manifest version 3:
+
+{
+  "manifest_version": 3,
+  "name": "Hacker News Extension",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://news.ycombinator.com/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  }
+}
+
+You can find more information about the manifest file in manifest version 3 in the Chrome Extension Developer Guide.
+
 
