@@ -211,3 +211,22 @@ This will download the Hacker News favicon from the web and save it as "icon.png
 
 I hope this helps! Let me know if you have any other questions.
 
+To debug the content script, you can use the Chrome DevTools to inspect the page and see what's happening when the script is injected. Here's how you can do this:
+
+1. Open the comment thread page on Hacker News where you want to test the content script.
+
+2. Open the Chrome DevTools by right-clicking on the page and selecting "Inspect" from the context menu, or by using the keyboard shortcut Ctrl+Shift+I (Windows) or Cmd+Opt+I (macOS).
+
+3. In the DevTools window, go to the "Sources" tab and expand the "Content scripts" section on the left.
+
+4. You should see the "content-script.js" file listed here. Click on it to open the script in the editor pane.
+
+5. You can now add breakpoints to the script by clicking on the line numbers on the left side of the editor pane. This will pause the script execution at the specified line, allowing you to inspect the page and see the values of variables and expressions at that point in the script.
+
+6. To test the content script, refresh the comment thread page and the script should be injected into the page. The DevTools will pause at the first breakpoint that you set, and you can step through the script line by line to see what's happening.
+
+7. As you step through the script, you can use the DevTools to inspect the page and see how the script is interacting with the page. For example, you can use the "Elements" tab to see the HTML structure of the page, and the "Console" tab to see any error messages or log output from the script.
+
+8. You can also use the "Sources" tab to see the values of variables and expressions in the script, and you can use the "Watch" pane to watch specific variables and expressions as the script runs.
+
+I hope this helps! Let me know if you have any other questions.
