@@ -134,4 +134,18 @@ The code that I provided should work with manifest version 3, but there may be s
 
 You can find more information about the manifest file in manifest version 3 in the Chrome Extension Developer Guide.
 
+The error message indicates that the "browser_action" key is not supported in manifest version 3, which is the version of the manifest file that you are using. In manifest version 3, the "browser_action" key is replaced by the "browser_action" property, which has a similar structure but uses different keys and values.
+
+Here is an example of how the "browser_action" property would look in manifest version 3:
+
+"browser_action": {
+  "default_title": "Hacker News Extension",
+  "default_popup": "popup.html"
+}
+
+To fix the error, you can update the manifest file to use the "browser_action" property instead of the "browser_action" key, and update the keys and values according to the example above.
+
+Alternatively, you can switch to using manifest version 2 by changing the "manifest_version" value in the manifest file from 3 to 2. This will allow you to use the "browser_action" key in the manifest file, and the extension should load without any errors.
+
+I hope this helps! Let me know if you have any other questions.
 
