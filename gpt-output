@@ -197,3 +197,17 @@ To use this manifest file, you will need to change the "manifest_version" value 
 
 I hope this helps! Let me know if you have any other questions.
 
+Yes, you can use the terminal to create a basic icon.png file that will work with your extension. You can use the touch command to create an empty file called "icon.png" in the extension's folder, like this:
+
+touch icon.png
+
+This will create a file called "icon.png" in the current directory, which you can then use as the default icon for your extension.
+
+Alternatively, you can use the curl command to download an image from the web and save it as "icon.png" in the extension's folder. For example, if you want to use the Hacker News logo as the extension's icon, you can run the following command:
+
+curl https://news.ycombinator.com/favicon.ico -o icon.png
+
+This will download the Hacker News favicon from the web and save it as "icon.png" in the current directory.
+
+I hope this helps! Let me know if you have any other questions.
+
