@@ -20,23 +20,9 @@ if (currentURL.indexOf("item?id=") !== -1) {
     console.log("User has visited the thread before. Last visit: ", localStorage.getItem(threadID));
 
     // If the user has visited the thread before, get the timestamp of the last visit
-   var lastVisit = localStorage.getItem(threadID);
+    var lastVisit = localStorage.getItem(threadID);
+  }
 
   // Get all the comments on the page
-  var comments = document.querySelectorAll(".comment-tree .comtr");
-
-  // Loop through the comments
-  for (var i = 0; i < comments.length; i++) {
-    // Get the timestamp of the comment
-    var commentTime = new Date(comments[i].querySelector(".age a").getAttribute("title")).getTime();
-
-    // Check if the comment was posted after the user's last visit to the thread
-    if (commentTime > lastVisit) {
-      console.log("Comment was posted after the user's last visit. Highlighting comment.");
-
-      // If so, highlight the comment
-      comments[i].style.backgroundColor = "yellow";
-    }
-  }
-}
+  var comments = document.querySelectorAll(".comment-tree .comtr
 
