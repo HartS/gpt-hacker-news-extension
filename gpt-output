@@ -149,3 +149,28 @@ Alternatively, you can switch to using manifest version 2 by changing the "manif
 
 I hope this helps! Let me know if you have any other questions.
 
+The error message indicates that you are trying to use the "browser_action" key in manifest version 3, which is not supported. In manifest version 3, the "browser_action" key is replaced by the "browser_action" property, which has a similar structure but uses different keys and values.
+
+Here is an example of what the manifest file would look like in manifest version 3, with the "browser_action" property instead of the "browser_action" key:
+
+{
+  "manifest_version": 3,
+  "name": "Hacker News Extension",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://news.ycombinator.com/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_title": "Hacker News Extension",
+    "default_popup": "popup.html"
+  }
+}
+
+To fix the error, you can either switch to using manifest version 2 by changing the "manifest_version" value in the manifest file from 3 to 2, or you can update the manifest file to use the "browser_action" property instead of the "browser_action" key, and update the keys and values according to the example above.
+
+I hope this helps! Let me know if you have any other questions.
+
