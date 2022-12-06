@@ -22,7 +22,7 @@ if (currentURL.indexOf("item?id=") !== -1) {
   console.log("Number of comments on page: ", comments.length);
 
   for (var i = 0; i < comments.length; i++) {
-    var commentTime = new Date(comments[i].querySelector(".age a").getAttribute("datetime")).getTime();
+    var commentTime = new Date(comments[i].querySelector(".age").getAttribute("title")).getTime();
 
     console.log("Comment #" + (i + 1) + " timestamp: ", commentTime);
 

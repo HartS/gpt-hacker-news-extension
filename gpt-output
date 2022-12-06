@@ -520,4 +520,45 @@ With this change, the content script should be able to parse the correct timesta
 
 I hope this helps! Let me know if you have any other questions.
 
+Here is what the updated content-script.js file would look like, with the changes to use the title attribute of the .age elements instead of the datetime attribute of the .age a elements:
+
+console.log("Current URL: ", window.location.href);
+
+var currentURL = window.location.href;
+
+if (currentURL.indexOf("item?id=") !== -1) {
+  console.log("URL is a comment thread on Hacker News");
+
+  var threadID = currentURL.split("=")[1];
+
+  if (localStorage.getItem(threadID) === null) {
+    console.log("User has not visited the thread before");
+
+    localStorage.setItem(threadID, Date.now());
+  } else {
+    console.log("User has visited the thread before. Last visit: ", localStorage.getItem(threadID));
+
+    var lastVisit = localStorage.getItem(threadID);
+  }
+
+  var comments = document.querySelectorAll(".comment-tree .comtr");
+
+  console.log("Number of comments on page: ", comments.length);
+
+  for (var i = 0; i < comments.length; i++) {
+    var commentTime = new Date(comments[i].querySelector(".age").getAttribute("title")).getTime();
+
+    console.log("Comment #" + (i + 1) + " timestamp: ", commentTime);
+
+    if (commentTime > lastVisit) {
+      console.log("Comment #" + (i + 1) + " was posted after the user's last visit. Highlighting comment.");
+
+      comments[i].style.backgroundColor = "yellow";
+    }
+  }
+}
+
+With this change, the content script should be able to parse the correct timestamps for each comment, and it should highlight the new comments when you revisit the comment thread.
+
+I hope this helps! Let me know if you have any other questions.
 
